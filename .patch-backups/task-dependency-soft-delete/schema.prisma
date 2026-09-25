@@ -1,0 +1,204 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  PM
+  INTERNAL
+  CLIENT
+}
+
+enum DepartmentType {
+  UI_UX
+  FRONTEND
+  BACKEND
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  BLOCKED
+  DONE
+}
+
+model Department {
+  id        String         @id @default(cuid())
+  name      DepartmentType @unique
+  users     User[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  deletedAt DateTime?
+
+  @@index([deletedAt])
+}
+
+model User {
+  id                 String           @id @default(cuid())
+  name               String
+  email              String           @unique
+  avatarUrl          String?
+  passwordHash       String
+  role               UserRole
+  departmentId       String?
+  department         Department?      @relation(fields: [departmentId], references: [id])
+  clientProjects     Project[]        @relation("ProjectClient")
+  projectMemberships ProjectMember[]
+  assignedTasks      Task[]           @relation("TaskAssignee")
+  createdTasks       Task[]           @relation("TaskCreator")
+  comments           Comment[]
+  attachments        TaskAttachment[]
+  auditLogs          AuditLog[]
+  authSessions       AuthSession[]
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
+
+  @@index([role])
+  @@index([departmentId])
+  @@index([deletedAt])
+}
+
+model Project {
+  id          String          @id @default(cuid())
+  name        String
+  description String?
+  clientId    String
+  client      User            @relation("ProjectClient", fields: [clientId], references: [id])
+  members     ProjectMember[]
+  tasks       Task[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  deletedAt   DateTime?
+
+  @@index([clientId])
+  @@index([deletedAt])
+}
+
+model ProjectMember {
+  id        String    @id @default(cuid())
+  projectId String
+  userId    String
+  project   Project   @relation(fields: [projectId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  @@unique([projectId, userId])
+  @@index([projectId])
+  @@index([userId])
+  @@index([deletedAt])
+}
+
+model Task {
+  id              String           @id @default(cuid())
+  projectId       String
+  title           String
+  description     String?
+  status          TaskStatus       @default(TODO)
+  department      DepartmentType
+  assigneeId      String?
+  createdById     String
+  isClientVisible Boolean          @default(false)
+  version         Int              @default(1)
+  project         Project          @relation(fields: [projectId], references: [id])
+  assignee        User?            @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  createdBy       User             @relation("TaskCreator", fields: [createdById], references: [id])
+  dependencies    TaskDependency[] @relation("TaskDependencies")
+  dependedOnBy    TaskDependency[] @relation("TaskDependents")
+  attachments     TaskAttachment[]
+  comments        Comment[]
+  auditLogs       AuditLog[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  deletedAt       DateTime?
+
+  @@index([projectId])
+  @@index([status])
+  @@index([department])
+  @@index([assigneeId])
+  @@index([createdById])
+  @@index([isClientVisible])
+  @@index([deletedAt])
+}
+
+model TaskDependency {
+  id              String   @id @default(cuid())
+  taskId          String
+  dependsOnTaskId String
+  task            Task     @relation("TaskDependencies", fields: [taskId], references: [id])
+  dependsOnTask   Task     @relation("TaskDependents", fields: [dependsOnTaskId], references: [id])
+  createdAt       DateTime @default(now())
+
+  @@unique([taskId, dependsOnTaskId])
+  @@index([taskId])
+  @@index([dependsOnTaskId])
+}
+
+model TaskAttachment {
+  id           String    @id @default(cuid())
+  taskId       String
+  uploadedById String
+  fileName     String
+  fileUrl      String
+  fileSize     Int?
+  mimeType     String?
+  task         Task      @relation(fields: [taskId], references: [id])
+  uploadedBy   User      @relation(fields: [uploadedById], references: [id])
+  createdAt    DateTime  @default(now())
+  deletedAt    DateTime?
+
+  @@index([taskId])
+  @@index([uploadedById])
+  @@index([deletedAt])
+}
+
+model Comment {
+  id        String    @id @default(cuid())
+  taskId    String
+  userId    String
+  content   String
+  task      Task      @relation(fields: [taskId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([taskId])
+  @@index([userId])
+  @@index([deletedAt])
+}
+
+model AuditLog {
+  id            String   @id @default(cuid())
+  taskId        String
+  userId        String
+  changedColumn String
+  oldValue      String?
+  newValue      String?
+  createdAt     DateTime @default(now())
+  task          Task     @relation(fields: [taskId], references: [id])
+  user          User     @relation(fields: [userId], references: [id])
+
+  @@index([taskId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model AuthSession {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([revokedAt])
+}
+

@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/bun": "latest",
+    "@types/jsonwebtoken": "^9.0.10",
+    "prisma": "7"
+  },
+  "peerDependencies": {
+    "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "@nodewave/prisma-ezfilter": "^0.2.1",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "7",
+    "bcrypt": "^6.0.0",
+    "hono": "^4.13.8",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.23.0",
+    "zod": "^4.6.5"
+  }
+}
