@@ -1,1 +1,1 @@
-@"C:\Users\Diman Fathurohman\.bun\bin\bun.exe" ./prisma/seed.ts
+bun ./prisma/seed.ts
