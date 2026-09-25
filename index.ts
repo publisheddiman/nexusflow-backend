@@ -13,7 +13,10 @@ const app = new Hono();
 app.use(
   "*",
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3001"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3001",
+    ],
     allowHeaders: [
       "Content-Type",
       "Authorization",
@@ -111,12 +114,7 @@ app.route("/users", usersRoutes);
 app.route("/departments", departmentRoutes);
 
 export default {
-  port: 3000,
+  port: Number(process.env.PORT) || 3000,
+  hostname: "0.0.0.0",
   fetch: app.fetch,
 };
-
-
-
-
-
-
