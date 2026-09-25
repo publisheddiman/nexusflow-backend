@@ -14,9 +14,10 @@ app.use(
   "*",
   cors({
     origin: [
-      "http://localhost:5173",
-      "http://localhost:3001",
-    ],
+  "http://localhost:5173",
+  "http://localhost:3001",
+  process.env.FRONTEND_URL || "",
+],
     allowHeaders: [
       "Content-Type",
       "Authorization",
