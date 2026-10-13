@@ -16,6 +16,7 @@ app.use(
     origin: [
   "http://localhost:5173",
   "http://localhost:3001",
+  "https://nexusflow-pm.vercel.app",
   process.env.FRONTEND_URL || "",
 ],
     allowHeaders: [
