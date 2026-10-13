@@ -1,4 +1,4 @@
-# NodeWave Project Management System
+# NexusFlow Project Management System
 
 A full-stack project management platform designed for managing large-scale project deliverables across Product Management, UI/UX, Frontend, Backend, and Client stakeholders.
 
@@ -6,11 +6,11 @@ A full-stack project management platform designed for managing large-scale proje
 
 ### Frontend
 
-https://nodewave-fullstack-frontend.vercel.app
+https://NexusFlow-fullstack-frontend.vercel.app
 
 ### Backend API
 
-https://nodewave-fullstack-backend-production.up.railway.app
+https://NexusFlow-fullstack-backend-production.up.railway.app
 
 Health Check:
 GET /health
@@ -27,10 +27,10 @@ Expected response:
 ## Repository
 
 Backend:
-https://github.com/publisheddiman/nodewave-fullstack-backend
+https://github.com/publisheddiman/NexusFlow-fullstack-backend
 
 Frontend:
-https://github.com/publisheddiman/nodewave-fullstack-frontend
+https://github.com/publisheddiman/NexusFlow-fullstack-frontend
 
 ## Demo Accounts
 
@@ -41,7 +41,7 @@ Password for all accounts:
 ### Product Manager
 
 Email:
-`pm@nodewave.local`
+`pm@NexusFlow.local`
 
 Access:
 
@@ -52,13 +52,13 @@ Access:
 ### Internal Team
 
 UI/UX:
-`uiux@nodewave.local`
+`uiux@NexusFlow.local`
 
 Frontend:
-`frontend@nodewave.local`
+`frontend@NexusFlow.local`
 
 Backend:
-`backend@nodewave.local`
+`backend@NexusFlow.local`
 
 Access:
 
@@ -74,7 +74,7 @@ Restrictions:
 ### Client Guest
 
 Email:
-`client@nodewave.local`
+`client@NexusFlow.local`
 
 Access:
 
@@ -257,11 +257,11 @@ Demo flow:
 
 # Submission
 
-NodeWave Fullstack Engineer Assessment
+NexusFlow Fullstack Engineer Assessment
 
 Frontend Repository:
-https://github.com/publisheddiman/nodewave-fullstack-frontend
+https://github.com/publisheddiman/NexusFlow-fullstack-frontend
 
 Backend Repository:
-https://github.com/publisheddiman/nodewave-fullstack-backend
+https://github.com/publisheddiman/NexusFlow-fullstack-backend
 """

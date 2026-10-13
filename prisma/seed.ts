@@ -87,18 +87,18 @@ async function main() {
   const pm =
     await prisma.user.upsert({
       where: {
-        email: "pm@nodewave.local",
+        email: "pm@nexusflow.local",
       },
       update: {
-        name: "NodeWave PM",
+        name: " PM",
         passwordHash,
         role: "PM",
         departmentId: null,
         deletedAt: null,
       },
       create: {
-        name: "NodeWave PM",
-        email: "pm@nodewave.local",
+        name: " PM",
+        email: "pm@nexusflow.local",
         passwordHash,
         role: "PM",
       },
@@ -109,7 +109,7 @@ async function main() {
   const uiUxUser =
     await prisma.user.upsert({
       where: {
-        email: "uiux@nodewave.local",
+        email: "uiux@nexusflow.local",
       },
       update: {
         name: "UI UX Engineer",
@@ -120,7 +120,7 @@ async function main() {
       },
       create: {
         name: "UI UX Engineer",
-        email: "uiux@nodewave.local",
+        email: "uiux@nexusflow.local",
         passwordHash,
         role: "INTERNAL",
         departmentId: uiUxDepartment.id,
@@ -132,7 +132,7 @@ async function main() {
   const frontendUser =
     await prisma.user.upsert({
       where: {
-        email: "frontend@nodewave.local",
+        email: "frontend@nexusflow.local",
       },
       update: {
         name: "Frontend Engineer",
@@ -143,7 +143,7 @@ async function main() {
       },
       create: {
         name: "Frontend Engineer",
-        email: "frontend@nodewave.local",
+        email: "frontend@nexusflow.local",
         passwordHash,
         role: "INTERNAL",
         departmentId: frontendDepartment.id,
@@ -155,7 +155,7 @@ async function main() {
   const backendUser =
     await prisma.user.upsert({
       where: {
-        email: "backend@nodewave.local",
+        email: "backend@nexusflow.local",
       },
       update: {
         name: "Backend Engineer",
@@ -166,7 +166,7 @@ async function main() {
       },
       create: {
         name: "Backend Engineer",
-        email: "backend@nodewave.local",
+        email: "backend@nexusflow.local",
         passwordHash,
         role: "INTERNAL",
         departmentId: backendDepartment.id,
@@ -178,18 +178,18 @@ async function main() {
   const client =
     await prisma.user.upsert({
       where: {
-        email: "client@nodewave.local",
+        email: "client@nexusflow.local",
       },
       update: {
-        name: "NodeWave Client",
+        name: "NexusFlow Client",
         passwordHash,
         role: "CLIENT",
         departmentId: null,
         deletedAt: null,
       },
       create: {
-        name: "NodeWave Client",
-        email: "client@nodewave.local",
+        name: "NexusFlow Client",
+        email: "client@nexusflow.local",
         passwordHash,
         role: "CLIENT",
       },
@@ -204,9 +204,9 @@ async function main() {
   const project =
     await prisma.project.create({
       data: {
-        name: "NodeWave Demo Project",
+        name: "NexusFlow Demo Project",
         description:
-          "Demo project for Fullstack Engineer assessment.",
+          "Demo project for NexusFlow Project Management Platform.",
         clientId: client.id,
       },
     });
@@ -320,19 +320,19 @@ async function main() {
 
   console.log("Accounts:");
   console.log(
-    "PM       : pm@nodewave.local",
+    "PM       : pm@nexusflow.local",
   );
   console.log(
-    "UI/UX    : uiux@nodewave.local",
+    "UI/UX    : uiux@nexusflow.local",
   );
   console.log(
-    "Frontend : frontend@nodewave.local",
+    "Frontend : frontend@nexusflow.local",
   );
   console.log(
-    "Backend  : backend@nodewave.local",
+    "Backend  : backend@nexusflow.local",
   );
   console.log(
-    "Client   : client@nodewave.local",
+    "Client   : client@nexusflow.local",
   );
   console.log(
     "Password : Password123!",

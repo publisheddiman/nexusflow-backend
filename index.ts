@@ -35,7 +35,7 @@ app.use(
 
 app.get("/", (c) => {
   return c.json({
-    message: "NodeWave Backend API is running",
+    message: "NexusFlow Backend API is running",
   });
 });
 
